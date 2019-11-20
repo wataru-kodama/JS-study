@@ -1,0 +1,42 @@
+@charset "utf-8";
+body {
+  margin: 0;
+  padding: 0;
+}
+main {
+  background: #ddd;
+  height: 350px;
+  margin: 0 auto;
+  padding-top: 10px;
+  width: 350px;
+}
+.time {
+  align-items: center;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  width: 200px;
+}
+ul {
+  display: flex;
+  list-style: none;
+  height:150px;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 0;
+  width: 300px;
+}
+ul li {
+  align-items: center;
+  display: flex;
+}
+ul li button {
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  width: 90px;
+}
