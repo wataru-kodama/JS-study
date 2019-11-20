@@ -1,0 +1,53 @@
+@charset "utf-8";
+main {
+  margin: 0 auto;
+  height: 400px;
+  width: 900px;
+}
+.time {
+  align-items: center;
+  background: #ddd;
+  display: flex;
+  height: 200px;
+  margin: 0 auto 30px;
+  width: 700px;
+}
+.time p {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  font-size: 2rem;
+  justify-content: center;
+  height: 80px;
+  margin: 0 auto;
+  width: 500px;
+}
+.time-button {
+  height: 200px;
+  margin: 0 auto;
+  width: 700px;
+}
+.time-button ul {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.time-button ul li {
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  height: 80px;
+  text-align: center;
+  width: 80px;
+}
+.time-button ul li button {
+  border: none;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
