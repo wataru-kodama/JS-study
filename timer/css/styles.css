@@ -35,19 +35,20 @@ main {
   list-style: none;
 }
 .time-button ul li {
+  height: 80px;
+  width: 80px;
+}
+.time-button ul li button {
   align-items: center;
   border: 1px solid #000;
   border-radius: 50%;
   box-sizing: border-box;
   display: flex;
+  font-size: 1rem;
   justify-content: center;
   height: 80px;
-  text-align: center;
-  width: 80px;
-}
-.time-button ul li button {
-  border: none;
-  font-size: 1rem;
   margin: 0;
   padding: 0;
+  text-align: center;
+  width: 80px;
 }
