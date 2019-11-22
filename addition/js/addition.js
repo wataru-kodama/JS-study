@@ -1,12 +1,13 @@
 $(function() {
   var
+  result,
   $addition = $('#addition');
 
-  $addition.append($('<tr>').attr('id','line1'));
-  // $('#line1').append($('<td>').text('1+1=2'));
-  // $('#line1').append($('<td>').text('1+2=3'));
-  // $('#line1').append($('<td>').text('1+3=4'));
-  for(var i = 1; i < 10; i++) {
-    $('#line1').append($('<td>').text('1+' + i))
-  }
+  for(i = 1; i < 10; i++) {
+    $addition.append($('<tr>').attr('id','line' + i));
+    for(var j = 1; j < 10; j++) {
+      result = i + j;
+      $('#line' + i).append($('<td>').text(j + '+' + i + '=' + result));
+    };
+  };
 });
