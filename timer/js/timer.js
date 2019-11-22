@@ -4,8 +4,10 @@ $(function() {
   var
   minute,
   second,
+  millisecond,
   defaultTime = 180,
-  time = defaultTime,
+  defaultMilliTime = 100,
+  time = defaultTime * defaultMilliTime,
   checkTimer = false,
   $timer = $('#timer');
 
@@ -21,7 +23,7 @@ $(function() {
           clearInterval(checkTimer);
           $timer.text('Time Up!');
         };
-      }, 1000);
+      }, 10);
     }
   });
   $('#stop').on('click', function() {
@@ -31,13 +33,14 @@ $(function() {
   $('#reset').on('click', function() {
     clearInterval(checkTimer);
     checkTimer = false;
-    time = defaultTime;
+    time = defaultTime * defaultMilliTime;
     setTime();
   });
 
   function setTime() {
-    minute = ("0" + Math.floor(time / 60)).slice(-2);
-    second = ("0" + time % 60).slice(-2);
-    $timer.text(minute + ":" + second);
+    minute = ("0" + Math.floor((time / defaultMilliTime) / 60)).slice(-2);
+    second = ("0" + Math.floor(time / defaultMilliTime ) % 60).slice(-2);
+    millisecond = ("0" + time % defaultMilliTime).slice(-2);
+    $timer.text(minute + ":" + second + "." + millisecond);
   }
 });
