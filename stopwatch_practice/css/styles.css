@@ -1,0 +1,32 @@
+@charset "utf-8";
+main {
+  background: #cc9966;
+  border: 4px solid #996600;
+  margin: 0 auto;
+  height: 380px;
+  padding-top: 10px;
+  width: 340px;
+}
+.time {
+  background: #fff;
+  border: 4px solid #996600;
+  border-radius: 50%;
+  height: 230px;
+  margin: 0 auto 20px;
+  width: 230px;
+}
+.btn {
+  display: flex;
+  margin: 0;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+}
+.btn li button {
+  border: 2px solid #996600;
+  font-size: 0.9rem;
+  font-weight: bold;
+  height: 40px;
+  padding: 0;
+  width: 100px;
+}
