@@ -7,18 +7,19 @@ $(function() {
   millisecond,
   defaultTime = 0,
   time = defaultTime,
+  checkStopwatch = false,
   $stopwatch = $('#stopwatch');
 
   setTime();
 
   $('#start').on('click', function() {
-    setInterval(function() {
+    checkStopwatch = setInterval(function() {
       time++;
       setTime();
     },10);
   });
   $('#stop').on('click', function() {
-    console.log(2);
+    clearInterval(checkStopwatch);
   });
   $('#reset').on('click', function() {
     console.log(3);
