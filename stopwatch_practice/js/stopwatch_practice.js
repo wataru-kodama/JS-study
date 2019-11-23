@@ -22,7 +22,9 @@ $(function() {
     clearInterval(checkStopwatch);
   });
   $('#reset').on('click', function() {
-    console.log(3);
+    clearInterval(checkStopwatch);
+    time = defaultTime;
+    setTime();
   });
   function setTime() {
     minute = ("0" + Math.floor(time / 6000)).slice(-2);
