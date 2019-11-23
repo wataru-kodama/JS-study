@@ -3,3 +3,23 @@ main {
   margin: 0 auto;
   width: 650px;
 }
+table {
+  border: 3px solid #006633;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+table caption {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+table tr td {
+  border: 1px solid #336633;
+  padding: 4px;
+}
+table tr:nth-child(odd) td:nth-child(even) {
+  background: #669966;
+}
+table tr:nth-child(even) td:nth-child(odd) {
+  background: #669966;
+}
