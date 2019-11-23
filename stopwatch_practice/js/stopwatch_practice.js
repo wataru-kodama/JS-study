@@ -13,18 +13,22 @@ $(function() {
   setTime();
 
   $('#start').on('click', function() {
-    checkStopwatch = setInterval(function() {
-      time++;
-      setTime();
-    },10);
+    if(checkStopwatch === false) {
+      checkStopwatch = setInterval(function() {
+        time++;
+        setTime();
+      },10);
+    };
   });
   $('#stop').on('click', function() {
     clearInterval(checkStopwatch);
+    checkStopwatch = false;
   });
   $('#reset').on('click', function() {
     clearInterval(checkStopwatch);
     time = defaultTime;
     setTime();
+    checkStopwatch = false;
   });
   function setTime() {
     minute = ("0" + Math.floor(time / 6000)).slice(-2);
