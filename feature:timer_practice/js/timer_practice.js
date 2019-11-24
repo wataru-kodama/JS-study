@@ -6,18 +6,19 @@ $(function() {
   millisecond,
   defaultTIme = 6000,
   time = defaultTIme,
+  checktimer = false,
   $timer = $('#timer');
 
   setTime();
 
   $('#start').on('click', function() {
-    setInterval(function() {
+    checktimer = setInterval(function() {
       time--;
       setTime();
     }, 10);
   });
   $('#stop').on('click', function() {
-    console.log('stop');
+    clearInterval(checktimer);
   });
   $('#reset').on('click', function() {
     console.log('reset');
