@@ -27,12 +27,16 @@ $(function() {
   $('#addition').on('click', function() {
     for(i = 1; i < 10; i++) {
       for(j = 1; j < 10; j++) {
-        $('#line' + i).find('td').eq(j - 1).text(i + j);
+        $('#line' + i).find('td').eq(j - 1).text(i+j);
       };
     };
   });
-  $('#miltiplication').on('click', function() {
-    console.log(1);
+  $('#multiplication').on('click', function() {
+    for(i = 0; i < 10; i++) {
+      for(j = 1; j < 10; j++) {
+        $('#line' + i).find('td').eq(j - 1).text(i*j);
+      };
+    };
   });
   $('#reset').on('click', function() {
     console.log(2);
