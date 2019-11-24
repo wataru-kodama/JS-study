@@ -1,0 +1,35 @@
+@charset "utf-8";
+main {
+  background: #ddd;
+  height: 340px;
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 270px;
+}
+.time {
+  align-items: center;
+  background: #fff;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 30px;
+  height: 190px;
+  width: 220px;
+}
+.time h1 {
+  margin: 0;
+}
+.timer-btn {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.timer-btn button {
+  border-radius: 50%;
+  height: 60px;
+  margin: 0 10px;
+  padding: 0;
+  width: 60px ;
+}
