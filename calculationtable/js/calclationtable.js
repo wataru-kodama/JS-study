@@ -39,6 +39,10 @@ $(function() {
     };
   });
   $('#reset').on('click', function() {
-    console.log(2);
+    for(i = 1; i < 10; i++) {
+      for(j = 1; j < 10; j++) {
+        $('#line' + i).find('td').eq(j - 1).text("");
+      };
+    };
   });
 });

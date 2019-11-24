@@ -1,4 +1,21 @@
 @charset "utf-8";
+table {
+  border-collapse: collapse;
+  margin: 0 0 20px;
+}
 table tr td, table tr th {
   border: 1px solid #000;
+}
+table tr td, table tr th {
+  box-sizing: border-box;
+  height: 45px;
+  text-align: center;
+  width: 45px;
+}
+.wrapper-button button {
+  border: 3px solid #bbb;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  height: 40px;
+  width: 80px;
 }
