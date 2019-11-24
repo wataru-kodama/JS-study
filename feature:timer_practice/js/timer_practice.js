@@ -4,26 +4,34 @@ $(function() {
   minute,
   second,
   millisecond,
-  defaultTIme = 6000,
-  time = defaultTIme,
-  checktimer = false,
+  defaultTime = 6000,
+  time = defaultTime,
+  checkTimer = false,
   $timer = $('#timer');
 
   setTime();
 
   $('#start').on('click', function() {
-    checktimer = setInterval(function() {
-      time--;
-      setTime();
-    }, 10);
+    if(checkTimer === false && time > 0) {
+      checkTimer = setInterval(function() {
+        time--;
+        setTime();
+        if(time === 0) {
+          clearInterval(checkTimer);
+          $timer.text('-Time up-');
+        };
+      }, 10);
+    };
   });
   $('#stop').on('click', function() {
-    clearInterval(checktimer);
+    clearInterval(checkTimer);
+    checkTimer = false;
   });
   $('#reset').on('click', function() {
-    clearInterval(checktimer);
-    time = defaultTIme;
+    clearInterval(checkTimer);
+    time = defaultTime;
     setTime();
+    checkTimer = false;
   });
   function setTime() {
     minute = ("0" + Math.floor(time / 6000)).slice(-2);
