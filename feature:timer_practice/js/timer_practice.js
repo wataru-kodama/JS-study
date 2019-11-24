@@ -21,7 +21,9 @@ $(function() {
     clearInterval(checktimer);
   });
   $('#reset').on('click', function() {
-    console.log('reset');
+    clearInterval(checktimer);
+    time = defaultTIme;
+    setTime();
   });
   function setTime() {
     minute = ("0" + Math.floor(time / 6000)).slice(-2);
