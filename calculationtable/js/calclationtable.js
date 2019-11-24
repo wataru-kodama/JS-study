@@ -23,5 +23,18 @@ $(function() {
         $('#line' + i).append($('<td>'));
       };
     };
-  }
+  };
+  $('#addition').on('click', function() {
+    for(i = 1; i < 10; i++) {
+      $('#line1').find('td').eq(i - 1).text(1 + i)
+      // $('#line1').find('td').eq(1).text(1 + 2)
+      // $('#line1').find('td').eq(2).text(1 + 3)
+    }
+  });
+  $('#miltiplication').on('click', function() {
+    console.log(1);
+  });
+  $('#reset').on('click', function() {
+    console.log(2);
+  });
 });
