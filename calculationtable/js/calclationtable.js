@@ -26,10 +26,10 @@ $(function() {
   };
   $('#addition').on('click', function() {
     for(i = 1; i < 10; i++) {
-      $('#line1').find('td').eq(i - 1).text(1 + i)
-      // $('#line1').find('td').eq(1).text(1 + 2)
-      // $('#line1').find('td').eq(2).text(1 + 3)
-    }
+      for(j = 1; j < 10; j++) {
+        $('#line' + i).find('td').eq(j - 1).text(i + j);
+      };
+    };
   });
   $('#miltiplication').on('click', function() {
     console.log(1);
