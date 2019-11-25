@@ -17,11 +17,20 @@ $(function() {
       }
     };
   };
-  // $calculationtable.append($('<tr>').attr('id','line2'));
-  // for(var i = 0; i < 10; i++) {
-  //   $('#line2').append($('<td>').text(i));
-  // };
-  // $('#line1').append($('<td>').text(2));
-  // $('#line1').append($('<td>').text(3));
-  // $('#line1').append($('<td>').text(4));
+  $('#addition').on('click', function() {
+    for(i = 1; i < 10; i++) {
+      for(var j = 1; j < 10; j++) {
+        $('#line' + i).find('td').eq(j).text(i + j);
+        // $('#line2').find('td').eq(j).text(j + 2);
+      };
+    };
+    // $('#line1').find('td').eq(2).text(3);
+    // $('#line1').find('td').eq(3).text(4);
+  });
+  $('#multiplication').on('click', function() {
+    console.log(2);
+  });
+  $('#reset').on('click', function() {
+    console.log(3);
+  });
 });
