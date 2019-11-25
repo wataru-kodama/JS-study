@@ -21,14 +21,16 @@ $(function() {
     for(i = 1; i < 10; i++) {
       for(var j = 1; j < 10; j++) {
         $('#line' + i).find('td').eq(j).text(i + j);
-        // $('#line2').find('td').eq(j).text(j + 2);
       };
     };
-    // $('#line1').find('td').eq(2).text(3);
-    // $('#line1').find('td').eq(3).text(4);
   });
   $('#multiplication').on('click', function() {
-    console.log(2);
+    for(var i = 1; i < 10; i++) {
+      for(var j = 1; j < 10; j++) {
+        $('#line' + i).find('td').eq(j).text(i * j);
+      };
+    }
+    $('#line1').find('td').eq(2).text(1 * 2);
   });
   $('#reset').on('click', function() {
     console.log(3);
