@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>配列</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        var
+          date1 = [59, 39, 100, 2, 15, 40, 84, 97],
+          date2 = [63, 18, 64, 97, 50, 98],
+          date1_length = date1.length,
+          date1_sum = 0,
+          i,
+          date2_length = date2.length,
+          date2_sum = 0,
+          date_sum = 0,
+          date_length = 0,
+          date_average = 0;
+        // 1 全体の平均値
+        for(i = 0; i < date1_length; i++) {
+          date1_sum += date1[i];
+        };
+        for(i = 0; i < date2_length; i++) {
+          date2_sum += date2[i];
+        };
+        date_sum = date1_sum + date2_sum
+        console.log(date_sum);
+        date_length = date1_length + date2_length
+        console.log(date_length);
+        date_average = date_sum / date_length
+        console.log(date_average);
+
+        // 2 平均値以上の数字表示
+        setAverage(date1, date_average);
+        setAverage(date2, date_average);
+        function setAverage(list, average) {
+          var
+            i,
+            list_length = date_length;
+            $average = $('#average');
+          for(i = 0; i < list_length; i++) {
+            if(list[i] >= average) {
+              $average.append($('<p>').text('平均値以上の数値:' + list[i]));
+            };
+          };
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <h1>配列</h1>
+    <section id="average"></section>
+  </body>
+</html>
