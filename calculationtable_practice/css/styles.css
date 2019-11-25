@@ -1,0 +1,16 @@
+@charset "UTF-8";
+table {
+  border-collapse: collapse;
+  margin: 0 0 20px;
+}
+table tr td {
+  border: 1px solid #000000;
+  height: 40px;
+  text-align: center;
+  width: 40px;
+}
+.calculation-btn button {
+  font-size: 0.9rem;
+  height: 40px;
+  width: 100px;
+}
