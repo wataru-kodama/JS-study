@@ -33,6 +33,10 @@ $(function() {
     $('#line1').find('td').eq(2).text(1 * 2);
   });
   $('#reset').on('click', function() {
-    console.log(3);
+    for(var i = 1; i < 10; i++) {
+      for(var j = 1; j < 10; j++) {
+        $('#line' + i).find('td').eq(j).text('');
+      };
+    };
   });
 });
