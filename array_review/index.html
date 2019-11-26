@@ -5,6 +5,7 @@
     <title>配列2</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
+      $(function() {
       var 
       data1 = [63, 18, 64, 97, 50, 98],
       data2 = [59, 39, 100, 2, 15, 40, 84, 97],
@@ -20,30 +21,37 @@
       data_length,
       data_average;
       // 1.全体の平均値
-      // 2.平均値以上の数値を表示
-      // 3.平均値以下の数値を表示
       for(i = 0; i < data1_length; i++) {
         data1_sum += data1[i];
-        // console.log('data1_sum:' + data1_sum);
       };
       for(i = 0; i < data2_length; i++) {
         data2_sum += data2[i];
-        // console.log('data2_sum:' + data2_sum);
       };
       for(i = 0; i < data3_length; i++) {
         data3_sum += data3[i];
-        // console.log('data3_sum:' + data3_sum);
       };
       data_sum = data1_sum + data2_sum + data3_sum;
-      console.log('全体の合計値:' + data_sum);
+      // console.log('全体の合計値:' + data_sum);
       data_length = data1_length + data2_length + data3_length;
-      console.log(data_length);
+      // console.log(data_length);
       data_average = data_sum / data_length;
       console.log('全体の平均値:' + data_average);
+      // 2.平均値以上の値を表示
+      setAverage(data1, data1_length);
+      setAverage(data2, data2_length);
+      setAverage(data3, data3_length);
+      function setAverage(list, length) {
+      for(var i = 0; i < length; i++) {
+        if(list[i] >= data_average) {
+          $('#average').append($('<p>').text('平均値以上の値 :' + list[i]));
+        };
+      };
+      };
+      });
     </script>
   </head>
   <body>
-    <h1>配列</h1>
-    <div id="array"></div>
+    <h1 class="title">配列</h1>
+    <section id="average"></section>
   </body>
 </html>
