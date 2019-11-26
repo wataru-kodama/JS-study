@@ -1,0 +1,13 @@
+@charset "UTF-8";
+#average {
+  display: flex;
+}
+.average-above {
+  margin-right: 20px;
+}
+.average-below {
+  margin-right: 20px;
+}
+.data-average {
+  color: #ff3300;
+}
