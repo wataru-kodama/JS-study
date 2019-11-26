@@ -1,11 +1,15 @@
 $(function() {
   'use strict';
   var
-  $calculationtable = $('#calculationtable');
+    $calculationtable = $('#calculationtable'),
+    i,
+    j,
+    Calc,
+    Folmula;
 
-  for(var i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     $calculationtable.append($('<tr>').attr('id','line' + i));
-    for(var j = 0; j < 10; j++) {
+    for(j = 0; j < 10; j++) {
       if (i === 0 && j === 0) {
         $('#line' + i).append($('<td>'));
       }else if(i === 0 && j !== 0) {
@@ -18,25 +22,51 @@ $(function() {
     };
   };
   $('#addition').on('click', function() {
-    for(i = 1; i < 10; i++) {
-      for(var j = 1; j < 10; j++) {
-        $('#line' + i).find('td').eq(j).text(i + j);
-      };
-    };
+    Calculation('addition');
+    setForumula('addition');
   });
   $('#multiplication').on('click', function() {
-    for(var i = 1; i < 10; i++) {
-      for(var j = 1; j < 10; j++) {
-        $('#line' + i).find('td').eq(j).text(i * j);
-      };
-    }
-    $('#line1').find('td').eq(2).text(1 * 2);
+    Calculation('multiplication');
+    setForumula('multiplication')
   });
   $('#reset').on('click', function() {
-    for(var i = 1; i < 10; i++) {
-      for(var j = 1; j < 10; j++) {
-        $('#line' + i).find('td').eq(j).text('');
+    Calculation('reset');
+    setForumula('reset');
+  });
+  function Calculation(kind) {
+    for(i = 1; i < 10; i++) {
+      for(j = 1; j < 10; j++) {
+        switch(kind) {
+          case 'addition':
+            Calc = i + j;
+            break;
+          case 'multiplication':
+            Calc = i * j;
+            break;
+          case 'reset':
+            Calc = '';
+            break;
+          default:
+            break;
+        };
+        $('#line' + i).find('td').eq(j).text(Calc);
       };
     };
-  });
+  };
+  function setForumula(kind) {
+    switch(kind) {
+      case 'addition':
+        Folmula = '+'
+        break;
+      case 'multiplication':
+        Folmula = '×'
+        break;
+      case 'reset':
+        Folmula = '';
+        break;
+      default:
+        break;
+    };
+    $('#line0').find('td').eq(0).text(Folmula);
+  };
 });
