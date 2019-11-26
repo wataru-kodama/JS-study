@@ -8,10 +8,38 @@
       var 
       data1 = [63, 18, 64, 97, 50, 98],
       data2 = [59, 39, 100, 2, 15, 40, 84, 97],
-      data3 = [79, 45, 18, 86, 57, 51, 100, 26, 37, 91];
+      data3 = [79, 45, 18, 86, 57, 51, 100, 26, 37, 91],
+      i,
+      data1_length = data1.length,
+      data1_sum = 0,
+      data2_length = data2.length,
+      data2_sum = 0,
+      data3_length = data3.length,
+      data3_sum = 0,
+      data_sum = 0,
+      data_length,
+      data_average;
       // 1.全体の平均値
       // 2.平均値以上の数値を表示
       // 3.平均値以下の数値を表示
+      for(i = 0; i < data1_length; i++) {
+        data1_sum += data1[i];
+        // console.log('data1_sum:' + data1_sum);
+      };
+      for(i = 0; i < data2_length; i++) {
+        data2_sum += data2[i];
+        // console.log('data2_sum:' + data2_sum);
+      };
+      for(i = 0; i < data3_length; i++) {
+        data3_sum += data3[i];
+        // console.log('data3_sum:' + data3_sum);
+      };
+      data_sum = data1_sum + data2_sum + data3_sum;
+      console.log('全体の合計値:' + data_sum);
+      data_length = data1_length + data2_length + data3_length;
+      console.log(data_length);
+      data_average = data_sum / data_length;
+      console.log('全体の平均値:' + data_average);
     </script>
   </head>
   <body>
