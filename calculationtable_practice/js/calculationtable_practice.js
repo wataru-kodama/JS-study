@@ -23,15 +23,15 @@ $(function() {
   };
   $('#addition').on('click', function() {
     Calculation('addition');
-    setForumula('addition');
+    $('#line0').find('td').eq(0).text(setForumula('addition'));
   });
   $('#multiplication').on('click', function() {
     Calculation('multiplication');
-    setForumula('multiplication')
+    $('#line0').find('td').eq(0).text(setForumula('multiplication'));
   });
   $('#reset').on('click', function() {
     Calculation('reset');
-    setForumula('reset');
+    $('#line0').find('td').eq(0).text(setForumula('reset'));
   });
   function Calculation(kind) {
     for(i = 1; i < 10; i++) {
@@ -67,6 +67,6 @@ $(function() {
       default:
         break;
     };
-    $('#line0').find('td').eq(0).text(Folmula);
+    return Folmula;
   };
 });
