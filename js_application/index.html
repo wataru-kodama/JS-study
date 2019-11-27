@@ -10,28 +10,41 @@
           var
             getName = $('#name').val(),
             getUrl = $('#url').val();
-          if(getName !== '' && getUrl !== '') {
-            $('.warning').empty();
-            var
-              setName = '',
-              setNameParent = $('.link').children('p'),
-              setNameList = $('.link').find('a'),
-              setNameListLength = setNameList.length;
-            for(var i = 0; i < setNameListLength; i++) {
-              setName = setNameList.eq(i).text();
-              if(getName === setName) {
-                $('.warning').append($('<p>').text('このリンク名はすでに登録されています。'));
-                setNameParent.remove();
-              };
-            };
-            $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
-          }else if(getName === '' && getUrl === '') {
+          if(getName === '' && getUrl === '') {
             $('.warning').text('リンク名・URLを入力してください').css('color', 'red');
-          }else if(getName !== '') {
+          }else if(getName !== '' && getUrl === '') {
             $('.warning').text('URLを入力してください').css('color', 'red');
-          }else if (getUrl !== '') {
+          }else if (getName === '' && getUrl !== '') {
             $('.warning').text('リンク名を入力してください').css('color', 'red');
+          }else if(getName !== '' && getUrl !== '') {
+          $('.warning').empty();
+          var
+            setName = '',
+            setUrl = '',
+            setParent = $('.link').children('p'),
+            setList = $('.link').find('a'),
+            setListLength = setList.length;
+            error_text = '';
+          for(var i = 0; i < setListLength; i++) {
+            setName = setList.eq(i).text();
+            setUrl = setList.eq(i).attr('href');
+            if(getName === setName && getUrl === setUrl) {
+              error_text = 'リンク名・URL';
+            }else if(getName === setName) {
+              error_text = 'リンク名';
+            }else if(getUrl === setUrl) {
+              error_text = 'URL';
+            };
           };
+            if (error_text  === '') {
+              $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
+            } else {
+              set_error(error_text);
+            };
+          };
+          function set_error(kind) {
+                $('.warning').append($('<p>').text('この'+ kind + 'はすでに登録されています。'))
+              };
         });
       });
     </script>
