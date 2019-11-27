@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>js practice</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        $('#btn').on('click', function() {
+          var
+            getName = $('#name').val(),
+            getUrl = $('#url').val();
+          if(getName !== '' && getUrl !== '') {
+            $('.warning').empty();
+            var
+              setName = '',
+              setNameParent = $('.link').children('p'),
+              setNameList = $('.link').find('a'),
+              setNameListLength = setNameList.length;
+            for(var i = 0; i < setNameListLength; i++) {
+              setName = setNameList.eq(i).text();
+              if(getName === setName) {
+                $('.warning').append($('<p>').text('このリンク名はすでに登録されています。'));
+                setNameParent.remove();
+              };
+            };
+            $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
+          }else if(getName === '' && getUrl === '') {
+            $('.warning').text('リンク名・URLを入力してください').css('color', 'red');
+          }else if(getName !== '') {
+            $('.warning').text('URLを入力してください').css('color', 'red');
+          }else if (getUrl !== '') {
+            $('.warning').text('リンク名を入力してください').css('color', 'red');
+          };
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <section class="form">
+      <form action="#" method="POST">
+        <p>
+          <label for="name">リンク名</label><br>
+          <input id="name" type="text" name="name"><br>
+        </p>
+        <p>
+          <label for="url">URL</label><br>
+          <input id="url" type="url" name="url"><br>
+        </p>
+        <p>
+          <input id="btn" type="button" name="btn" value="リンク追加">
+        </p>
+        <p class="warning"></p>
+      </form>
+    </section>
+    <section class="link"></section>
+  </body>
+</html>
