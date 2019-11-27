@@ -47,9 +47,10 @@
       for(i = 0; i < length; i++) {
         if(list[i] >= list_average) {
           $('.average-above').append($('<p>').text('平均値以上の値 :' + list[i]));
-        }else {
+        };
+        if(list[i] <= list_average) {
           $('.average-below').append($('<p>').text('平均値以下の値 :' + list[i]));
-        }
+        };
       };
       };
       });
