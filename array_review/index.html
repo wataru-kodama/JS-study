@@ -37,10 +37,10 @@
       $('#average').append($('<p>').attr('class', 'data-average').text('全体の平均値:' + data_average));
       // 2.平均値以上の値を表示
       // 3.平均値以下の値を表示
-      averageAbove(data1, data1_length);
-      averageAbove(data2, data2_length);
-      averageAbove(data3, data3_length);
-      function averageAbove(list, length) {
+      setAverage(data1, data1_length);
+      setAverage(data2, data2_length);
+      setAverage(data3, data3_length);
+      function setAverage(list, length) {
         var
           i,
           list_average = data_average;
