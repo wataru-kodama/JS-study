@@ -17,7 +17,6 @@
           }else if (getName === '' && getUrl !== '') {
             $('.warning').text('リンク名を入力してください').css('color', 'red');
           }else if(getName !== '' && getUrl !== '') {
-          $('.warning').empty();
           var
             setName = '',
             setUrl = '',
@@ -38,12 +37,13 @@
           };
             if (error_text  === '') {
               $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
+              $('.warning').empty();
             } else {
               set_error(error_text);
             };
           };
           function set_error(kind) {
-                $('.warning').append($('<p>').text('この'+ kind + 'はすでに登録されています。'))
+                $('.warning').text('この'+ kind + 'はすでに登録されています。').css('color', 'red');
               };
         });
       });
