@@ -7,47 +7,69 @@
     <script>
       $(function() {
         $('#btn').on('click', function() {
+          $('#warning').empty();
           var
-            getName = $('#name').val(),
-            getUrl = $('#url').val();
-          if(getName === '' && getUrl === '') {
-            blankError('リンク名・URL');
-          }else if(getName !== '' && getUrl === '') {
-            blankError('URL');
-          }else if (getName === '' && getUrl !== '') {
-            blankError('リンク名');
-          }else if(getName !== '' && getUrl !== '') {
-            var
-              setName = '',
-              setUrl = '',
-              setList = $('.link').find('a'),
-              setListLength = setList.length;
-              error_text = '';
-            for(var i = 0; i < setListLength; i++) {
-              setName = setList.eq(i).text();
-              setUrl = setList.eq(i).attr('href');
-              if(getName === setName && getUrl === setUrl) {
-                error_text = 'リンク名・URL';
-              }else if(getName === setName) {
-                error_text = 'リンク名';
-              }else if(getUrl === setUrl) {
-                error_text = 'URL';
-              };
+            getName       = $('#name').val(),
+            getUrl        = $('#url').val(),
+            errorList     = [],
+            error         = false,
+            setName       = '',
+            setUrl        = '',
+            setList       = $('.link').find('a'),
+            setListLength = setList.length;
+
+          if(getName == '') {
+            errorList.push('リンク名');
+            error = true;
+          };
+          if(getUrl == '') {
+            errorList.push('URL');
+            error = true;
+          };
+          if(error) {
+            setError(errorList, '未入力');
+            return;
+          };
+          for(var i = 0; i < setListLength; i++) {
+            setName = setList.eq(i).text();
+            setUrl = setList.eq(i).attr('href');
+            if(getName === setName) {
+              errorList.push('リンク名');
+              error = true;
             };
-            if (error_text  === '') {
-              $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
-              $('.warning').empty();
-            } else {
-              set_error(error_text);
+            if(getUrl === setUrl) {
+              errorList.push('URL');
+              error = true;
             };
           };
-          function blankError(text) {
-            $('.warning').append($('<p>').text(text + 'を入力してください').css('color', 'red'));
-          }
-          function set_error(kind) {
-            $('.warning').append($('<p>').text('この'+ kind + 'はすでに登録されています。').css('color', 'red'));
+          if(error) {
+            setError(errorList, '重複');
+            return;
           };
+          $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
         });
+        function setError(list, kind) {
+          var
+            length    = list.length,
+            errorText = '',
+            i;
+
+          for(i = 0; i < length; i++) {
+            if(i > 0) {
+              errorText += '・';
+            };
+            errorText += list[i];
+          };
+          switch(kind) {
+            case '未入力':
+              errorText += 'を入力してください';
+              break;
+            case '重複':
+              errorText += 'はすでに登録されています。';
+              break;
+          };
+          $('#warning').text(errorText).css('color', 'red');
+        };
       });
     </script>
   </head>
