@@ -11,11 +11,11 @@
             getName = $('#name').val(),
             getUrl = $('#url').val();
           if(getName === '' && getUrl === '') {
-            $('.warning').text('リンク名・URLを入力してください').css('color', 'red');
+            blankError('リンク名・URL');
           }else if(getName !== '' && getUrl === '') {
-            $('.warning').text('URLを入力してください').css('color', 'red');
+            blankError('URL');
           }else if (getName === '' && getUrl !== '') {
-            $('.warning').text('リンク名を入力してください').css('color', 'red');
+            blankError('リンク名');
           }else if(getName !== '' && getUrl !== '') {
             var
               setName = '',
@@ -41,6 +41,9 @@
               set_error(error_text);
             };
           };
+          function blankError(text) {
+            $('.warning').text(text + 'を入力してください').css('color', 'red');
+          }
           function set_error(kind) {
                 $('.warning').text('この'+ kind + 'はすでに登録されています。').css('color', 'red');
               };
