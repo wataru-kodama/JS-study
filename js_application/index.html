@@ -42,11 +42,11 @@
             };
           };
           function blankError(text) {
-            $('.warning').text(text + 'を入力してください').css('color', 'red');
+            $('.warning').append($('<p>').text(text + 'を入力してください').css('color', 'red'));
           }
           function set_error(kind) {
-                $('.warning').text('この'+ kind + 'はすでに登録されています。').css('color', 'red');
-              };
+            $('.warning').append($('<p>').text('この'+ kind + 'はすでに登録されています。').css('color', 'red'));
+          };
         });
       });
     </script>
@@ -65,9 +65,9 @@
         <p>
           <input id="btn" type="button" name="btn" value="リンク追加">
         </p>
-        <p class="warning"></p>
       </form>
     </section>
+    <section id="warning" style="width: 100%; height: 50px;"></section>
     <section class="link"></section>
   </body>
 </html>
