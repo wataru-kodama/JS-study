@@ -17,23 +17,23 @@
           }else if (getName === '' && getUrl !== '') {
             $('.warning').text('リンク名を入力してください').css('color', 'red');
           }else if(getName !== '' && getUrl !== '') {
-          var
-            setName = '',
-            setUrl = '',
-            setList = $('.link').find('a'),
-            setListLength = setList.length;
-            error_text = '';
-          for(var i = 0; i < setListLength; i++) {
-            setName = setList.eq(i).text();
-            setUrl = setList.eq(i).attr('href');
-            if(getName === setName && getUrl === setUrl) {
-              error_text = 'リンク名・URL';
-            }else if(getName === setName) {
-              error_text = 'リンク名';
-            }else if(getUrl === setUrl) {
-              error_text = 'URL';
+            var
+              setName = '',
+              setUrl = '',
+              setList = $('.link').find('a'),
+              setListLength = setList.length;
+              error_text = '';
+            for(var i = 0; i < setListLength; i++) {
+              setName = setList.eq(i).text();
+              setUrl = setList.eq(i).attr('href');
+              if(getName === setName && getUrl === setUrl) {
+                error_text = 'リンク名・URL';
+              }else if(getName === setName) {
+                error_text = 'リンク名';
+              }else if(getUrl === setUrl) {
+                error_text = 'URL';
+              };
             };
-          };
             if (error_text  === '') {
               $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
               $('.warning').empty();
