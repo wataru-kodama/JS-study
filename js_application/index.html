@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <title>js practice</title>
+    <link rel="stylesheet" href="css/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
       $(function() {
+        var
+        linkList  = [],
+        idCount = 1;
         $('#btn').on('click', function() {
           $('#warning').empty();
           var
@@ -46,7 +50,42 @@
             setError(errorList, '重複');
             return;
           };
-          $('.link').append($('<P>').append($('<a>').attr('href', getUrl).text(getName)));
+
+          linkList.push({id:idCount,name:getName,url:getUrl});
+          idCount++;
+          var
+            length = linkList.length;
+            $('#linktable').empty();
+
+            for(var i = 0; i < length; i++) {
+              $('#linktable').append($('<tr>').attr('id', linkList[i].id)
+              .append($('<td>').append($('<a>').attr('href', linkList[i].url).text(linkList[i].name)))
+              .append($('<td>').append($('<button>').attr('class', 'edit').text('編集')))
+              .append($('<td>').append($('<button>').attr('class', 'delete').text('削除'))));
+            };
+            console.log(linkList);
+            $('#name').val("");
+            $('#url').val("");
+
+            $('.edit').on('click', function() {
+              $('.textEdit').removeClass('textEdit');
+              $(this).parents('tr').addClass('textEdit');
+              var 
+                nameEdit = $('.textEdit').find('a').text(),
+                urlEdit = $('.textEdit').find('a').attr('href'),
+                saveBtn = $('#btn').val("保存する").attr('id', 'editBtn');
+              $('#name').val(nameEdit);
+              $('#url').val(urlEdit);
+
+              saveBtn.on('click', function() {
+                $('.textEdit').find('a').attr('href', urlEdit).text(nameEdit);
+                // console.log($('.textEdit'));
+                $(this).val('リンクを追加');
+              });
+            });
+            $('.delete').on('click', function() {
+              $(this).parents('tr').remove();
+            });
         });
         function setError(list, kind) {
           var
@@ -77,6 +116,9 @@
     <section class="form">
       <form action="#" method="POST">
         <p>
+          <input type="hidden" name="id" value="">
+        </p>
+        <p>
           <label for="name">リンク名</label><br>
           <input id="name" type="text" name="name"><br>
         </p>
@@ -89,7 +131,9 @@
         </p>
       </form>
     </section>
-    <section id="warning" style="width: 100%; height: 50px;"></section>
-    <section class="link"></section>
+    <section id="warning"></section>
+    <section class="link">
+      <table id="linktable"></table>
+    </section>
   </body>
 </html>

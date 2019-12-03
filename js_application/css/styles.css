@@ -1,0 +1,19 @@
+@charset "UTF-8";
+#warning {
+  height: 50%;
+  width: 100%;
+}
+#linktable {
+  border-collapse: collapse;
+}
+#linktable tr td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 6px 10px;
+}
+#linktable tr td:first-child {
+  width: 250px;
+}
+.textEdit td:first-child {
+  background: #eee;
+}
