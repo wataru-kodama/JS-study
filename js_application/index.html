@@ -8,9 +8,9 @@
     <script>
       $(function() {
         var
-        linkList  = [],
-        idCount = 1;
-        $('#btn').on('click', function() {
+          linkList  = [],
+          idCount = 1;
+        $('#addBtn').on('click', function() {
           $('#warning').empty();
           var
             getName       = $('#name').val(),
@@ -57,35 +57,116 @@
             length = linkList.length;
             $('#linktable').empty();
 
-            for(var i = 0; i < length; i++) {
-              $('#linktable').append($('<tr>').attr('id', linkList[i].id)
-              .append($('<td>').append($('<a>').attr('href', linkList[i].url).text(linkList[i].name)))
-              .append($('<td>').append($('<button>').attr('class', 'edit').text('編集')))
-              .append($('<td>').append($('<button>').attr('class', 'delete').text('削除'))));
+          for(var i = 0; i < length; i++) {
+            $('#linktable').append($('<tr>').attr('id', linkList[i].id)
+            .append($('<td>').append($('<a>').attr('href', linkList[i].url).text(linkList[i].name)))
+            .append($('<td>').append($('<button>').attr('class', 'edit').text('編集')))
+            .append($('<td>').append($('<button>').attr('class', 'delete').text('削除'))));
+          };
+          $('#name').val("");
+          $('#url').val("");
+        });
+        $(document).on('click', '.edit', function() {
+          $('.textEdit').removeClass('textEdit');
+          $(this).parents('tr').addClass('textEdit');
+          var 
+            nameEdit = $('.textEdit').find('a').text(),
+            urlEdit = $('.textEdit').find('a').attr('href'),
+            idEdit = $('.textEdit').attr('id');
+          $('#name').val(nameEdit);
+          $('#url').val(urlEdit);
+          $('#id').val(idEdit);
+
+          $('#addBtn').hide();
+          $('#saveBtn').show();
+        });
+        $(document).on('click', '#saveBtn', function() {
+          var
+            nameEdit = $('.textEdit').find('a').text(),
+            urlEdit = $('.textEdit').find('a').attr('href'),
+            addName = $('#name').val(),
+            addUrl  = $('#url').val(),
+            errorList     = [],
+            error         = false,
+            setName       = '',
+            setUrl        = '',
+            setList       = $('.link').find('a'),
+            setListLength = setList.length,
+            noEdit = 0,
+            editTarget = 2;
+
+          if(addName == '') {
+            errorList.push('リンク名');
+            error = true;
+          };
+          if(addUrl == '') {
+            errorList.push('URL');
+            error = true;
+          };
+          if(error) {
+            setError(errorList, '未入力');
+            return;
+          };
+          for(var i = 0; i < setListLength; i++) {
+            setName = setList.eq(i).text();
+            setUrl = setList.eq(i).attr('href');
+            if(addName === setName) {
+              if(addName === nameEdit) {
+                 noEdit++;
+              }else {
+                errorList.push('リンク名');
+                error = true;
+              };
             };
-            console.log(linkList);
-            $('#name').val("");
-            $('#url').val("");
+            if(addUrl === setUrl) {
+              if(addUrl === urlEdit) {
+                noEdit++;
+              }else {
+                errorList.push('URL');
+                error = true;
+              };
+            };
+          };
+          if(error) {
+            setError(errorList, '重複');
+            return;
+          };
 
-            $('.edit').on('click', function() {
-              $('.textEdit').removeClass('textEdit');
-              $(this).parents('tr').addClass('textEdit');
-              var 
-                nameEdit = $('.textEdit').find('a').text(),
-                urlEdit = $('.textEdit').find('a').attr('href'),
-                saveBtn = $('#btn').val("保存する").attr('id', 'editBtn');
-              $('#name').val(nameEdit);
-              $('#url').val(urlEdit);
+          if(noEdit === editTarget) {
+            setError([], '変更');
+            return;
+          };
 
-              saveBtn.on('click', function() {
-                $('.textEdit').find('a').attr('href', urlEdit).text(nameEdit);
-                // console.log($('.textEdit'));
-                $(this).val('リンクを追加');
-              });
-            });
-            $('.delete').on('click', function() {
-              $(this).parents('tr').remove();
-            });
+          var
+           idEdit = $('.textEdit').attr('id'),
+           length = linkList.length;
+          $.each(linkList, function(i, val) {
+            if(parseInt(idEdit, 10) === val.id) {
+              val.name = addName;
+              val.url = addUrl;
+            };
+          });
+          // console.log(linkList);
+          $('.textEdit').find('a').attr('href', addUrl).text(addName);
+          $('#addBtn').show();
+          $('#saveBtn').hide();
+          $('#warning').remove();
+          $('.textEdit').removeClass('textEdit');
+          $('#name').val("");
+          $('#url').val("");
+        });
+        $(document).on('click', '.delete', function() {
+          var
+            idEdit = $(this).parents('tr').attr('id');
+          // console.log(linkList);
+          $.each(linkList, function(i, val) {
+            if(parseInt(idEdit, 10) === val.id) {
+              linkList.splice(i,1);
+              return false;
+            };
+          });
+          $(this).parents('tr').remove();
+          // console.log(linkList);
         });
         function setError(list, kind) {
           var
@@ -106,6 +187,9 @@
             case '重複':
               errorText += 'はすでに登録されています。';
               break;
+            case '変更':
+              errorText += '変更されてません';
+            break;
           };
           $('#warning').text(errorText).css('color', 'red');
         };
@@ -116,7 +200,7 @@
     <section class="form">
       <form action="#" method="POST">
         <p>
-          <input type="hidden" name="id" value="">
+          <input id="id" type="hidden" name="id" value="">
         </p>
         <p>
           <label for="name">リンク名</label><br>
@@ -127,7 +211,8 @@
           <input id="url" type="url" name="url"><br>
         </p>
         <p>
-          <input id="btn" type="button" name="btn" value="リンク追加">
+          <input id="addBtn" type="button" name="btn" value="リンク追加">
+          <input id="saveBtn" type="button" name="btn" value="変更を保存する">
         </p>
       </form>
     </section>

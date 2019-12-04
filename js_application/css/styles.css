@@ -17,3 +17,6 @@
 .textEdit td:first-child {
   background: #eee;
 }
+#saveBtn {
+  display: none;
+}
