@@ -8,46 +8,24 @@
     <script>
       $(function() {
         var
-          linkList  = [],
-          idCount = 1;
+          linkList = [],
+          idCount  = 1;
         $('#addBtn').on('click', function() {
           $('#warning').empty();
           var
-            getName       = $('#name').val(),
-            getUrl        = $('#url').val(),
-            errorList     = [],
-            error         = false,
-            setName       = '',
-            setUrl        = '',
-            setList       = $('.link').find('a'),
-            setListLength = setList.length;
+            getName    = $('#name').val(),
+            getUrl     = $('#url').val(),
+            resultList = [];
 
-          if(getName == '') {
-            errorList.push('リンク名');
-            error = true;
-          };
-          if(getUrl == '') {
-            errorList.push('URL');
-            error = true;
-          };
-          if(error) {
-            setError(errorList, '未入力');
+          resultList = setEmptyJudgment(getName, getUrl);
+          if(resultList.length > 0) {
+            setError(resultList, '未入力');
             return;
           };
-          for(var i = 0; i < setListLength; i++) {
-            setName = setList.eq(i).text();
-            setUrl = setList.eq(i).attr('href');
-            if(getName === setName) {
-              errorList.push('リンク名');
-              error = true;
-            };
-            if(getUrl === setUrl) {
-              errorList.push('URL');
-              error = true;
-            };
-          };
-          if(error) {
-            setError(errorList, '重複');
+
+          resultList = setDuplicateJudgment(getName, getUrl);
+          if(resultList.length > 0) {
+            setError(resultList, '重複');
             return;
           };
 
@@ -71,8 +49,8 @@
           $(this).parents('tr').addClass('textEdit');
           var 
             nameEdit = $('.textEdit').find('a').text(),
-            urlEdit = $('.textEdit').find('a').attr('href'),
-            idEdit = $('.textEdit').attr('id');
+            urlEdit  = $('.textEdit').find('a').attr('href'),
+            idEdit   = $('.textEdit').attr('id');
           $('#name').val(nameEdit);
           $('#url').val(urlEdit);
           $('#id').val(idEdit);
@@ -82,58 +60,28 @@
         });
         $(document).on('click', '#saveBtn', function() {
           var
-            nameEdit = $('.textEdit').find('a').text(),
-            urlEdit = $('.textEdit').find('a').attr('href'),
-            addName = $('#name').val(),
-            addUrl  = $('#url').val(),
-            errorList     = [],
-            error         = false,
-            setName       = '',
-            setUrl        = '',
-            setList       = $('.link').find('a'),
-            setListLength = setList.length,
-            noEdit = 0,
+            nameEdit   = $('.textEdit').find('a').text(),
+            urlEdit    = $('.textEdit').find('a').attr('href'),
+            addName    = $('#name').val(),
+            addUrl     = $('#url').val(),
+            resultList = [],
+            noEdit     = 0,
             editTarget = 2;
 
-          if(addName == '') {
-            errorList.push('リンク名');
-            error = true;
-          };
-          if(addUrl == '') {
-            errorList.push('URL');
-            error = true;
-          };
-          if(error) {
-            setError(errorList, '未入力');
-            return;
-          };
-          for(var i = 0; i < setListLength; i++) {
-            setName = setList.eq(i).text();
-            setUrl = setList.eq(i).attr('href');
-            if(addName === setName) {
-              if(addName === nameEdit) {
-                 noEdit++;
-              }else {
-                errorList.push('リンク名');
-                error = true;
-              };
-            };
-            if(addUrl === setUrl) {
-              if(addUrl === urlEdit) {
-                noEdit++;
-              }else {
-                errorList.push('URL');
-                error = true;
-              };
-            };
-          };
-          if(error) {
-            setError(errorList, '重複');
+          resultList = setEmptyJudgment(addName, addUrl);
+          if(resultList.length > 0) {
+            setError(resultList, '未入力');
             return;
           };
 
-          if(noEdit === editTarget) {
+          resultList = setDuplicateJudgment(addName, addUrl, '変更');
+          if(!$.isArray(resultList)) {
             setError([], '変更');
+            return;
+          };
+
+          if(resultList.length > 0) {
+            setError(resultList, '重複');
             return;
           };
 
@@ -165,6 +113,56 @@
           });
           $(this).parents('tr').remove();
         });
+        function setEmptyJudgment(name, url) {
+          var errorList = [];
+          if(name == '') {
+            errorList.push('リンク名');
+          };
+          if(url == '') {
+            errorList.push('URL');
+          };
+          return errorList;
+        };
+        function setDuplicateJudgment(name, url, op = '') {
+          var
+            errorList     = [],
+            setName       = '',
+            setUrl        = '',
+            setList       = $('.link').find('a'),
+            setListLength = setList.length,
+            nameEdit      = '',
+            urlEdit       = '',
+            noEdit        = 0,
+            editTarget    = 2;
+
+          if(op === '変更') {
+            nameEdit = $('.textEdit').find('a').text();
+            urlEdit = $('.textEdit').find('a').attr('href');
+          };
+
+          for(var i = 0; i < setListLength; i++) {
+            setName = setList.eq(i).text();
+            setUrl = setList.eq(i).attr('href');
+            if(name === setName) {
+              if(name === nameEdit) {
+                noEdit++;
+              }else {
+                errorList.push('リンク名');
+              };
+            };
+            if(url === setUrl) {
+              if(url === urlEdit) {
+                noEdit++;
+              }else {
+                errorList.push('URL');
+              };
+            };
+          };
+          if(noEdit === editTarget) {
+            return 'noEdit';
+          };
+          return errorList;
+        };
         function setError(list, kind) {
           var
             length    = list.length,
