@@ -146,11 +146,10 @@
               val.url = addUrl;
             };
           });
-          // console.log(linkList);
           $('.textEdit').find('a').attr('href', addUrl).text(addName);
           $('#addBtn').show();
           $('#saveBtn').hide();
-          $('#warning').remove();
+          $('#warning').empty();
           $('.textEdit').removeClass('textEdit');
           $('#name').val("");
           $('#url').val("");
@@ -158,7 +157,6 @@
         $(document).on('click', '.delete', function() {
           var
             idEdit = $(this).parents('tr').attr('id');
-          // console.log(linkList);
           $.each(linkList, function(i, val) {
             if(parseInt(idEdit, 10) === val.id) {
               linkList.splice(i,1);
@@ -166,7 +164,6 @@
             };
           });
           $(this).parents('tr').remove();
-          // console.log(linkList);
         });
         function setError(list, kind) {
           var
