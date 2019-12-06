@@ -35,6 +35,10 @@
   list-style-type: none;
   width: 50px;
 }
+li.hitnum {
+  background: #336633;
+  color: #fff;
+}
 .wrapper-btn {
   text-align: center;
 }

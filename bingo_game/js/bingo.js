@@ -5,7 +5,8 @@ $(function() {
     numMax = 50,
     numList = [],
     roulette,
-    number;
+    number,
+    result = 0;
   for(var i = 1; i <= numMax; i++) {
     numList.push(i);
     $('#numberarea').append($('<li>').attr('id', 'num' + i).text(i));
@@ -20,7 +21,12 @@ $(function() {
     $('#startbtn').hide();
     $('#stopbtn').show();
   });
+  
   $('#stopbtn').on('click', function() {
+    clearInterval(roulette);
+    result = numList[number];
+    numList.splice(number, 1);
+    $('#numberarea').find('li').eq(parseInt(result, 10) - 1).addClass('hitnum');
     $('#startbtn').show();
     $('#stopbtn').hide();
   });
