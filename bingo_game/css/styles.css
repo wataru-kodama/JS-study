@@ -1,0 +1,50 @@
+@charset "utf-8";
+.bingoarea {
+  margin: 0 auto;
+  padding: 10px 0 10px;
+  width: 800px;
+}
+.result {
+  align-items: center;
+  background: #fff;
+  border: 3px solid #336633;
+  color: #336633;
+  display: flex;
+  font-size: 4.5rem;
+  height: 150px;
+  justify-content: center;
+  margin: 0 auto 20px;
+  width: 150px;
+}
+.numberarea {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto 30px;
+  padding: 0;
+  width: 600px;
+}
+.numberarea li {
+  align-items: center;
+  border: 2px solid #336633;
+  box-sizing: border-box;
+  color: #336633;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  margin: 5px;
+  list-style-type: none;
+  width: 50px;
+}
+.wrapper-btn {
+  text-align: center;
+}
+.btn {
+  background: #336633;
+  border: 2px solid #336633;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.3rem;
+  height: 120px;
+  width: 120px;
+}
