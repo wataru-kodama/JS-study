@@ -1,0 +1,31 @@
+@charset "utf-8";
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 20px;
+}
+form p {
+  font-size: 1.2rem;
+  margin: 0;
+  padding-left: 10px;
+}
+form p:not(:last-child) {
+  margin: 0 0 30px;
+}
+input[type="text"] {
+  border: 2px solid #bbb;
+  border-radius: 2px;
+  height: 20px;
+  width: 350px;
+}
+.btn {
+  background: #eee;
+  border: 2px solid #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 28px;
+  padding: 0;
+  width: 90px;
+}
+.savebtn {
+  display: none;
+}
