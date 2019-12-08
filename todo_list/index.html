@@ -9,18 +9,19 @@
   </head>
   <body>
     <h1>ToDo リスト</h1>
-    <form>
+    <section class="form">
       <p>
         <label for="text">タスク</label><br>
         <input id="text" type="text" name="text">
       </p>
       <p>
-        <button class="addbtn btn">追加する</button>
-        <button class="savebtn btn">編集を保存する</button>
+        <button class="addbtn btn" id="addbtn">追加する</button>
+        <button class="savebtn btn" id="savebtn">編集を保存する</button>
       </p>
-    </form>
+    </section>
+    <section class="warning" id="warning"></section>
     <section class="list">
-      <table class="listtable"></table>
+      <table class="listtable" id="listtable"></table>
     </section>
   </body>
 </html>
