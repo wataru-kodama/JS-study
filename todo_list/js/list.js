@@ -2,35 +2,36 @@ $(function() {
   'use strict';
 
   var
-    setList = [],
+    tascList = [],
     idCount = 1;
   $('#addbtn').on('click', function() {
     var
       tasc = $('#text').val(),
       setlist = $('#listtable').children('tr'),
-      settasc;
+      length = setlist.length,
+      getTasc;
 
     $('#warning').empty();
     if(tasc === '') {
       $('#warning').append($('<p>').text('入力されていません').css('color', 'red'));
       return;
     };
-    for(var i = 0; i < setlist.length; i++) {
-      settasc = setlist.eq(i).children('#tasc').text();
-      if(tasc === settasc) {
+    for(var i = 0; i < length; i++) {
+      getTasc = setlist.eq(i).children('#tasc').text();
+      if(tasc === getTasc) {
         $('#warning').append($('<p>').text('すでに登録されています').css('color', 'red'));
         return;
       };
     };
-    setList.push({id:idCount,name:tasc});
+    tascList.push({id:idCount,name:tasc});
     idCount++;
     var
-    setList_length = setList.length;
+    length = tascList.length;
     $('.listtable').empty();
-    for(var i = 0; i < setList_length; i++) {
-      $('#listtable').append($('<tr>').attr('id', setList[i].id)
+    for(var i = 0; i < length; i++) {
+      $('#listtable').append($('<tr>').attr('id', tascList[i].id)
       .append($('<td>').attr('id', 'num').text(i + 1))
-      .append($('<td>').attr('id', 'tasc').text(setList[i].name))
+      .append($('<td>').attr('id', 'tasc').text(tascList[i].name))
       .append($('<td>').append($('<button>').attr('id', 'editbtn').text('編集')))
       .append($('<td>').append($('<button>').attr('id', 'deletebtn').text('削除')))
       .append($('<td>').append($('<button>').attr('id', 'completebtn').text('終了'))));
@@ -51,23 +52,24 @@ $(function() {
     var
       tasc = $('#text').val(),
       setlist = $('#listtable').children('tr'),
-      settasc;
+      length = setlist.length,
+      getTasc;
 
     $('#warning').empty();
     if(tasc === '') {
       $('#warning').append($('<p>').text('入力されていません').css('color', 'red'));
       return;
     };
-    for(var i = 0; i < setlist.length; i++) {
-      settasc = setlist.eq(i).children('#tasc').text();
-      if(tasc === settasc) {
+    for(var i = 0; i < length; i++) {
+      getTasc = setlist.eq(i).children('#tasc').text();
+      if(tasc === getTasc) {
         $('#warning').append($('<p>').text('すでに登録されています').css('color', 'red'));
         return;
       };
     };
     var
       eidtTasc = $('.edit').parents('tr').attr('id');
-    $.each(setList, function(i, val) {
+    $.each(tascList, function(i, val) {
       if(parseInt(eidtTasc, 10) === val.id) {
         val.name = tasc;
         return;
@@ -82,10 +84,10 @@ $(function() {
   $(document).on('click', '#deletebtn', function() {
     var
       setId = $(this).parents('tr').attr('id');
-    $.each(setList, function(i, val) {
-      if(parseInt(setId, 10) === val.id) {
-        setList.splice(i, 1);
-        return;
+    $.each(tascList, function(i, val) {
+      if(parseInt(setId,10) === val.id) {
+        tascList.splice(i, 1);
+        return false;
       };
     });
     $(this).parents('tr').remove();
