@@ -40,7 +40,7 @@ $(function() {
   $(document).on('click', '#editbtn', function() {
     var
       tasc = $(this).parents('tr').children('#tasc').text();
-
+    $('#warning').empty();
     $('.edit').removeClass('edit');
     $(this).parents('tr').children('#tasc').addClass('edit');
     $('#text').val(tasc);
@@ -84,6 +84,8 @@ $(function() {
     var
       setId = $(this).parents('tr').attr('id'),
       i;
+    $('#warning').empty();
+    $('#text').val('');
     $.each(tascList, function(i, val) {
       if(parseInt(setId,10) === val.id) {
         tascList.splice(i, 1);
@@ -93,6 +95,7 @@ $(function() {
     $(this).parents('tr').remove();
   });
   $(document).on('click', '#completebtn', function() {
+    $('#warning').empty();
     $(this).parents('tr').find('#editbtn').addClass('completebtn');
     $(this).parents('tr').find('#deletebtn').addClass('completebtn');
     $(this).parents('tr').addClass('complete');
