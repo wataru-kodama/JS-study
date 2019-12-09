@@ -87,7 +87,7 @@ $(function() {
     });
     $edit.text(editTasc);
     $text.val('');
-    $('.edit').removeClass('edit');
+    $edit.removeClass('edit');
     $addbtn.show();
     $savebtn.hide();
   });
