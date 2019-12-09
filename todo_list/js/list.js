@@ -6,13 +6,14 @@ $(function() {
     $warning = $('#warning'),
     $addbtn = $('#addbtn'),
     $savebtn = $('#savebtn'),
+    $listTable = $('#listtable'),
     tascList = [],
     idCount = 1;
 
   $addbtn.on('click', function() {
     var
       addTasc  = $text.val(),
-      todoList  = $('#listtable').children('tr'),
+      todoList  = $listTable.children('tr'),
       listLength   = todoList.length,
       getTasc  = '',
       i;
@@ -33,9 +34,9 @@ $(function() {
     idCount++;
     var
       tascLength   = tascList.length;
-    $('.listtable').empty();
+    $listTable.empty();
     for(i = 0; i < tascLength; i++) {
-      $('#listtable').append($('<tr>').attr('id', tascList[i].id)
+      $listTable.append($('<tr>').attr('id', tascList[i].id)
       .append($('<td>').attr('id', 'tasc').text(tascList[i].name))
       .append($('<td>').append($('<button>').attr('id', 'editbtn').text('編集')))
       .append($('<td>').append($('<button>').attr('id', 'deletebtn').text('削除')))
@@ -57,9 +58,10 @@ $(function() {
   $savebtn.on('click', function() {
     var
       editTasc = $text.val(),
-      setList  = $('#listtable').children('tr'),
+      setList  = $listTable.children('tr'),
       length   = setList.length,
       getTasc  = '',
+      $edit    = $('.edit'),
       i;
 
     $warning.empty();
@@ -75,7 +77,7 @@ $(function() {
       };
     };
     var
-      eidtId = $('.edit').parents('tr').attr('id');
+      eidtId = $edit.parents('tr').attr('id');
 
     $.each(tascList, function(i, val) {
       if(parseInt(eidtId, 10) === val.id) {
@@ -83,7 +85,7 @@ $(function() {
         return false;
       };
     });
-    $('.edit').text(editTasc);
+    $edit.text(editTasc);
     $text.val('');
     $('.edit').removeClass('edit');
     $addbtn.show();
