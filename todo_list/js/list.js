@@ -30,7 +30,6 @@ $(function() {
     $('.listtable').empty();
     for(var i = 0; i < length; i++) {
       $('#listtable').append($('<tr>').attr('id', tascList[i].id)
-      .append($('<td>').attr('id', 'num').text(i + 1))
       .append($('<td>').attr('id', 'tasc').text(tascList[i].name))
       .append($('<td>').append($('<button>').attr('id', 'editbtn').text('編集')))
       .append($('<td>').append($('<button>').attr('id', 'deletebtn').text('削除')))
@@ -72,7 +71,7 @@ $(function() {
     $.each(tascList, function(i, val) {
       if(parseInt(eidtTasc, 10) === val.id) {
         val.name = tasc;
-        return;
+        return false;
       };
     });
     $('.edit').text(tasc);
@@ -83,7 +82,8 @@ $(function() {
   });
   $(document).on('click', '#deletebtn', function() {
     var
-      setId = $(this).parents('tr').attr('id');
+      setId = $(this).parents('tr').attr('id'),
+      i;
     $.each(tascList, function(i, val) {
       if(parseInt(setId,10) === val.id) {
         tascList.splice(i, 1);
@@ -97,7 +97,7 @@ $(function() {
     $(this).parents('tr').find('#deletebtn').addClass('completebtn');
     $(this).parents('tr').addClass('complete');
     $(this).attr('id', 'cancelbtn').text('取り消し');
-    return;
+    return false;
   });
   $(document).on('click', '#cancelbtn', function() {
     $(this).parents('tr').removeClass('complete');
