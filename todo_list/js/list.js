@@ -13,23 +13,17 @@ $(function() {
   $addbtn.on('click', function() {
     var
       addtask  = $text.val(),
-      todoList  = $listTable.children('tr'),
-      listLength   = todoList.length,
-      gettask  = '',
+      errorResult = '',
       i;
 
     $warning.empty();
-    if(addtask === '') {
-      $warning.append($('<p>').text('入力されていません').css('color', 'red'));
+
+    errorResult = checkError(addtask, taskList);
+    if(errorResult !== true) {
+      setError(errorResult, $warning);
       return;
-    };
-    for(i = 0; i < listLength; i++) {
-      gettask = todoList.eq(i).children('#task').text();
-      if(addtask === gettask) {
-        $warning.append($('<p>').text('すでに登録されています').css('color', 'red'));
-        return;
-      };
-    };
+    }
+
     taskList.push({id:idCount, name:addtask, done:false});
     idCount++;
     var taskLength = taskList.length;
@@ -40,7 +34,7 @@ $(function() {
         .append($('<td>').append($('<button>').attr('id', 'editbtn').text('編集')))
         .append($('<td>').append($('<button>').attr('id', 'deletebtn').text('削除')))
         .append($('<td>').append($('<button>').attr('id', 'completebtn').text('終了'))));
-    };
+    }
     $text.val('');
   });
   $(document).on('click', '#editbtn', function() {
@@ -57,30 +51,24 @@ $(function() {
   $savebtn.on('click', function() {
     var
       edittask = $text.val(),
-      setList  = $listTable.children('tr'),
-      length   = setList.length,
-      gettask  = '',
       $edit    = $('.edit'),
+      errorResult = '',
       i;
 
     $warning.empty();
-    if(edittask === '') {
-      $warning.append($('<p>').text('入力されていません').css('color', 'red'));
+
+    errorResult = checkError(edittask, taskList);
+    if(errorResult !== true) {
+      setError(errorResult, $warning);
       return;
-    };
-    for(i = 0; i < length; i++) {
-      gettask = setList.eq(i).children('#task').text();
-      if(edittask === gettask) {
-        $warning.append($('<p>').text('すでに登録されています').css('color', 'red'));
-        return;
-      };
-    };
+    }
+
     var eidtId = $edit.parents('tr').attr('id');
     $.each(taskList, function(i, val) {
       if(parseInt(eidtId, 10) === val.id) {
         val.name = edittask;
         return false;
-      };
+      }
     });
     $edit.text(edittask);
     $text.val('');
@@ -99,13 +87,13 @@ $(function() {
         if(parseInt(setId,10) === val.id) {
           taskList.splice(i, 1);
           return false;
-        };
+        }
       });
       $(this).parents('tr').remove();
       $('.edit').removeClass('edit');
       $addbtn.show();
       $savebtn.hide();
-    };
+    }
   });
   $(document).on('click', '#completebtn', function() {
     var completeId = $(this).parents('tr').attr('id');
@@ -115,7 +103,7 @@ $(function() {
       if(parseInt(completeId, 10) === val.id) {
         val.done = true;
         return false;
-      };
+      }
     });
     $(this).parents('tr').addClass('complete');
     $(this).attr('id', 'cancelbtn').text('取り消し');
@@ -130,10 +118,39 @@ $(function() {
       if(parseInt(cancelId, 10) === val.id) {
         val.done = false;
         return false;
-      };
+      }
     });
     $(this).parents('tr').removeClass('complete');
     $('.completebtn').removeClass('completebtn');
     $(this).attr('id', 'completebtn').text('終了');
   });
+
+  function checkError(insertTask, list) {
+      if(insertTask === '') {
+        return '未入力';
+      }
+      var
+        length = list.length,
+        gettask = '',
+        i;
+      for(i = 0; i < length; i++) {
+        gettask = list[i].name;
+        if(insertTask === gettask) {
+          return '重複';
+        }
+      }
+      return true;
+  };
+  function setError(kind, $target) {
+    switch(kind) {
+      case '未入力':
+        $target.append($('<p>').text('入力されてません').css('color', 'red'));
+        break;
+      case '重複':
+        $target.append($('<p>').text('すでに登録されてます').css('color', 'red'));
+        break;
+      default:
+        break;
+    }
+  };
 });
