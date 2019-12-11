@@ -30,7 +30,7 @@ $(function() {
         return;
       };
     };
-    tascList.push({id:idCount,name:addTasc});
+    tascList.push({id:idCount,name:addTasc, done:false});
     idCount++;
     var
       tascLength   = tascList.length;
@@ -42,6 +42,7 @@ $(function() {
       .append($('<td>').append($('<button>').attr('id', 'deletebtn').text('削除')))
       .append($('<td>').append($('<button>').attr('id', 'completebtn').text('終了'))));
     };
+    console.log(tascList);
     $text.val('');
   });
   $(document).on('click', '#editbtn', function() {
@@ -94,24 +95,33 @@ $(function() {
   $(document).on('click', '#deletebtn', function() {
     var
       setId  = $(this).parents('tr').attr('id');
-
-    $warning.empty();
+    if(!confirm('本当に削除しますか？')) {
+      return false;
+    }else {
+      $warning.empty();
+      $text.val('');
+      $.each(tascList, function(i, val) {
+        if(parseInt(setId,10) === val.id) {
+          tascList.splice(i, 1);
+          return false;
+        };
+      });
+      $(this).parents('tr').remove();
+      $addbtn.show();
+      $savebtn.hide();
+    };
+  });
+  $(document).on('click', '#completebtn', function() {
+    var completeId = $(this).parents('tr').attr('id');
+    $warning.empty(); 
     $text.val('');
     $.each(tascList, function(i, val) {
-      if(parseInt(setId,10) === val.id) {
-        tascList.splice(i, 1);
+      if(parseInt(completeId, 10) === val.id) {
+        val.done = true;
         return false;
       };
     });
-    $(this).parents('tr').remove();
-    $addbtn.show();
-    $savebtn.hide();
-  });
-  $(document).on('click', '#completebtn', function() {
-    $warning.empty();
-    $text.val('');
-    $(this).parents('tr').find('#editbtn').addClass('completebtn');
-    $(this).parents('tr').find('#deletebtn').addClass('completebtn');
+    console.log(tascList);
     $(this).parents('tr').addClass('complete');
     $(this).attr('id', 'cancelbtn').text('取り消し');
     $addbtn.show();
@@ -120,6 +130,14 @@ $(function() {
     return false;
   });
   $(document).on('click', '#cancelbtn', function() {
+    var cancelId = $(this).parents('tr').attr('id');
+    $.each(tascList, function(i, val) {
+      if(parseInt(cancelId, 10) === val.id) {
+        val.done = false;
+        return false;
+      };
+    });
+    console.log(tascList);
     $(this).parents('tr').removeClass('complete');
     $('.completebtn').removeClass('completebtn');
     $(this).attr('id', 'completebtn').text('終了');
