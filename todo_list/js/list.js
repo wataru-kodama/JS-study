@@ -42,7 +42,6 @@ $(function() {
       .append($('<td>').append($('<button>').attr('id', 'deletebtn').text('削除')))
       .append($('<td>').append($('<button>').attr('id', 'completebtn').text('終了'))));
     };
-    console.log(tascList);
     $text.val('');
   });
   $(document).on('click', '#editbtn', function() {
@@ -121,7 +120,6 @@ $(function() {
         return false;
       };
     });
-    console.log(tascList);
     $(this).parents('tr').addClass('complete');
     $(this).attr('id', 'cancelbtn').text('取り消し');
     $addbtn.show();
@@ -137,7 +135,6 @@ $(function() {
         return false;
       };
     });
-    console.log(tascList);
     $(this).parents('tr').removeClass('complete');
     $('.completebtn').removeClass('completebtn');
     $(this).attr('id', 'completebtn').text('終了');
