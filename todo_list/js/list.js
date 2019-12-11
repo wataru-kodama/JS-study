@@ -13,7 +13,7 @@ $(function() {
   $addbtn.on('click', function() {
     var
       addtask  = $text.val(),
-      errorResult = '',
+      errorResult,
       i;
 
     $warning.empty();
@@ -52,8 +52,7 @@ $(function() {
     var
       edittask = $text.val(),
       $edit    = $('.edit'),
-      errorResult = '',
-      i;
+      errorResult;
 
     $warning.empty();
 
@@ -131,7 +130,7 @@ $(function() {
       }
       var
         length = list.length,
-        gettask = '',
+        gettask,
         i;
       for(i = 0; i < length; i++) {
         gettask = list[i].name;
@@ -140,7 +139,7 @@ $(function() {
         }
       }
       return true;
-  };
+  }
   function setError(kind, $target) {
     switch(kind) {
       case '未入力':
@@ -152,5 +151,5 @@ $(function() {
       default:
         break;
     }
-  };
+  }
 });
