@@ -29,7 +29,12 @@ img {
 .hit {
   visibility: hidden;
 }
-
+.time {
+  display: flex;
+}
+.time p:first-child {
+  margin-right: 10px;
+}
 /* 表面の表示 */
 .is-surface .card_surface {
   opacity: 1;
