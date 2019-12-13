@@ -38,8 +38,41 @@ $(function() {
     .appendTo($table)
   }
 
+  var
+    selectNum = '',
+    secondSelectNum,
+    selectList = [];
   $('.card').on('click', function() {
-    // var getNum = $(this).data('num');
-    $(this).toggleClass('is-reverse');
+    $(this).toggleClass('is-reverse').toggleClass('is-surface');
+    if(selectNum === '') {
+      selectNum = $(this).data('num');
+      selectList.push($(this).index());
+    } else {
+      if($(this).index() !== selectList[0]){
+        secondSelectNum = $(this).data('num')
+        selectList.push($(this).index());
+        if(secondSelectNum === selectNum) {
+          $.each(cards, function(i, val) {
+            if(selectList[i] === i) {
+              delete cards[i];
+            }
+          });
+          console.log(cards)
+          console.log(cards[0]);
+          $table.children('li').eq(selectList[0]).addClass('hit');
+          $table.children('li').eq(selectList[1]).addClass('hit');
+          selectList = [];
+          selectNum = '';
+        } else {
+          $table.children('li').eq(selectList[0]).toggleClass('is-reverse').toggleClass('is-surface');
+          $table.children('li').eq(selectList[1]).toggleClass('is-reverse').toggleClass('is-surface');
+          selectList = [];
+          selectNum = '';
+        }
+      } else {
+        selectNum = '';
+        selectList = [];
+      }
+    }
   });
 });
