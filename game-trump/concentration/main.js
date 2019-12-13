@@ -2,13 +2,23 @@ $(function() {
   'use strict';
 
   var
-  cards = [],
-  kind = ['d', 's', 'c', 'h'],
+  cards       = [],
+  kind        = ['d', 's', 'c', 'h'],
   kind_length = kind.length,
-  $li = $('<li>'),
-  $img = $('<img>'),
-  $table = $('#table'),
+  $li         = $('<li>'),
+  $img        = $('<img>'),
+  $table      = $('#table'),
   cards_len,
+  selectNum   = '',
+  selectList  = [],
+  defaultTime = 180,
+  time        = defaultTime,
+  minute,
+  second,
+  timer,
+  $timer      = $('#timer'),
+  startFlag   = false,
+  getCount    = 0,
   i,
   j;
 
@@ -43,18 +53,7 @@ $(function() {
     .appendTo($table)
   }
 
-  var
-    selectNum = '',
-    selectList = [],
-    defaultTime = 180,
-    time = defaultTime,
-    minute,
-    second,
-    timer,
-    $timer = $('#timer'),
-    startFlag = false;
-
-    $timer.text(setTimer());
+   $timer.text(countDown());
 
   $('.card').on('click', function() {
     if(!startFlag) {
@@ -77,6 +76,10 @@ $(function() {
             $table.children('li').eq(selectList[1]).addClass('hit');
             selectList = [];
             selectNum = '';
+            getCount += 2;
+            if(getCount === 52) {
+              gameResult('Game Clear!!')
+            }
           }, 1000)
         } else {
           setTimeout(function() {
@@ -93,7 +96,7 @@ $(function() {
     }
   });
 
-  function setTimer() {
+  function countDown() {
     minute = ('0' + Math.floor(time / 60)).slice(-2);
     second = ('0' + time % 60).slice(-2);
     return minute + ':' + second;
@@ -101,12 +104,20 @@ $(function() {
   function countTime() {
     timer = setInterval(function() {
       time--;
-      $timer.text(setTimer());
+      $timer.text(countDown());
       if(time === 0) {
         clearInterval(timer);
+        $('.card').off();
         $timer.text('Time Up!').css('color', 'red');
+        gameResult('-Game over-');
       }
     }, 1000);
+  }
+  function gameResult(resultText) {
+    $('.gamefinish').show();
+    $('.gameresult').show();
+    $('#end').text(resultText);
+    $('#count').text('獲得枚数' + getCount + '枚');
   }
   function shuffle() {
     var tmp;
