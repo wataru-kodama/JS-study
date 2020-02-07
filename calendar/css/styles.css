@@ -1,0 +1,42 @@
+.calendar-wrap {
+  border: 3px solid #eee;
+  margin: 0 auto 20px;
+  padding: 40px 0;
+  width: 400px;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  letter-spacing: .2rem;
+  margin: 0 0 30px;
+}
+
+.title h1 {
+  margin: 0;
+}
+
+.today {
+  color: red;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 300px;
+}
+
+button {
+  background: #eee;
+  border: 2px solid #ddd;
+  height: 30px;
+  width: 80px;
+}
