@@ -12,7 +12,6 @@ $(function() {
       $("th").eq(6).css('color', '#aaa');
     }
 
-
   var
     set_Day = new Date(),
     today = set_Day.getDate(),
@@ -21,11 +20,10 @@ $(function() {
     $last_btn = $('.last-month'),
     $next_btn = $('.next-month');
 
-    calendar(set_Year, set_Month, set_Day);
+  calendar(set_Year, set_Month, set_Day);
 
   $last_btn.on('click', function() {
     set_Month --;
-
     if(set_Month === -1) {
       set_Month = 11;
       set_Year --;
@@ -35,7 +33,6 @@ $(function() {
 
   $next_btn.on('click', function() {
     set_Month++;
-
     if(set_Month === 12) {
       set_Month = 0;
       set_Year ++;
@@ -75,7 +72,6 @@ $(function() {
     $tr += '</tr>';
     tableBody += $tr;
   }
-
   $('#table-date').html(tableBody);
   }
 })
