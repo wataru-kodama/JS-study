@@ -1,5 +1,6 @@
 .calendar-wrap {
-  border: 3px solid #eee;
+  border: 10px solid #eee;
+  box-sizing: border-box;
   margin: 0 auto 20px;
   padding: 40px 0;
   width: 400px;
@@ -22,7 +23,9 @@ td {
 }
 
 .today {
-  color: red;
+  background: #bbb;
+  border-radius: 4px;
+  color: #fff;
 }
 
 .btn {
