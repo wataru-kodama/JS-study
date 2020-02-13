@@ -9,7 +9,7 @@ $(function() {
     for(var i = 0; i < week_listLength; i++) {
       $('#table-week tr').append($('<th>').text(week_list[i]));
       $("th").eq(0).css('color', 'red');
-      $("th").eq(6).css('color', '#aaa');
+      $("th").eq(6).css('color', '#888');
     }
 
   var
@@ -20,7 +20,7 @@ $(function() {
     $last_btn = $('.last-month'),
     $next_btn = $('.next-month');
 
-  calendar(set_Year, set_Month, set_Day);
+  calendar(set_Year, set_Month, set_Day, week_list);
 
   $last_btn.on('click', function() {
     set_Month --;
@@ -28,7 +28,7 @@ $(function() {
       set_Month = 11;
       set_Year --;
     }
-    calendar(set_Year, set_Month, set_Day);
+    calendar(set_Year, set_Month, set_Day, week_list);
   })
 
   $next_btn.on('click', function() {
@@ -37,10 +37,10 @@ $(function() {
       set_Month = 0;
       set_Year ++;
     }
-    calendar(set_Year, set_Month, set_Day);
+    calendar(set_Year, set_Month, set_Day, week_list);
   })
 
-  function calendar(year, month, day) {
+  function calendar(year, month, day, week) {
     var
     startDay = new Date(year, month, 1),
     lastDay = new Date(year, month + 1, 0),
@@ -56,7 +56,7 @@ $(function() {
   $('.title').text(year + '年 ' + (month + 1) + '月');
   for(col = 0; col < 5; col++) {
     var $tr = '<tr>';
-    for(low = 0; low < 7; low++) {
+    for(low = 0; low < week.length; low++) {
       if(col === 0 && startDay_Week === low) {
         textSkip = false;
       }
@@ -65,8 +65,10 @@ $(function() {
       }
       var
         addClass = todayFlag && today === textDate ? 'today': '',
+        sun = col >= 0 && low === 0 ? 'sunday': '',
+        sat = col >= 0 && low === 6 ? 'saturday': '',
         textTd = textSkip ? ' ' : textDate++,
-        $td = '<td class='+addClass+'>'+textTd+'</td>';
+        $td = '<td class='+addClass+' '+sun+' '+sat+'>'+textTd+'</td>';
       $tr += $td;
     }
     $tr += '</tr>';
