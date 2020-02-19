@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>calendar</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.8/jquery.csv.min.js"></script>
+  <script src="encoding.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <div class="calendar-wrap">
+    <section class="title"></section>
+    <section class="calendar-table-wrap">
+      <table id="calendar-table">
+        <thead id="table-week"></thead>
+        <tbody id="table-date"></tbody>
+      </table>
+    </section>
+  </div>
+  <section class="btn">
+    <button class="last-month">＜</button>
+    <div class="publicholiday-area" id="publicholiday-area"></div>
+    <button class="next-month">＞</button>
+  </section>
+  <table class="data"></table>
+</body>
+</html>
