@@ -1,0 +1,73 @@
+.calendar-wrap {
+  border: 10px solid #eee;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 0 auto 20px;
+  padding: 40px 0;
+  width: 400px;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  height: 30px;
+}
+
+td {
+  text-align: center;
+  position: relative;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: .2rem;
+  margin: 0 0 30px;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 380px;
+}
+
+button {
+  background: #eee;
+  border: 2px solid #ddd;
+  height: 30px;
+  width: 80px;
+}
+
+.publicholiday-area {
+  font-size: .9rem;
+  line-height: 30px;
+}
+
+.today {
+  background: #ddd;
+  border-radius: 4px;
+  color: #fff !important;
+}
+
+.public-holiday::after {
+  bottom: 0;
+  content: '・';
+  color: #888;
+  position: absolute;
+  right: 0;
+  left: 0;
+  line-height: 6px;
+}
+
+.saturday {
+  color: #0000aa;
+}
+
+.sunday,
+.public-holiday {
+  color: red;
+}
